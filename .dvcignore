@@ -1,0 +1,13 @@
+# Add patterns of files dvc should ignore, which could improve
+# the performance. Learn more at
+# https://dvc.org/doc/user-guide/dvcignore
+
+.env
+venv/
+wandb/
+logs/
+
+src/app/
+__pycache__/
+
+colab_trained_model/

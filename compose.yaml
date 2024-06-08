@@ -1,0 +1,14 @@
+services:
+  api:
+    image: ladokhasia/mlops_mini     # build: .
+    ports:
+      - 80:8000
+    # volumes:
+    #   - ./:/usr/src/app:ro
+    # command: fastapi dev src/app/main.py--host 0.0.0.0 --port 8000 --reload
+    # env_file:
+    #   - ./.env
+    environment:
+      HF_TOKEN: ${HF_TOKEN}
+      WB_TOKEN: ${WB_TOKEN}
+

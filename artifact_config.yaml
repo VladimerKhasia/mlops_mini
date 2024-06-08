@@ -1,0 +1,15 @@
+artifacts_root: artifacts
+
+get_data:
+  data_id: "NickyNicky/function-calling_chatml_gemma_v1"
+  root_dir: artifacts/data
+
+pretrained:
+  id: 'google/gemma-1.1-2b-it'
+  root_dir: artifacts/pretrained
+  pretrained_model_path: artifacts/pretrained/model
+  pretrained_tokenizer_path: artifacts/pretrained/tokenizer
+
+finetune:
+  root_dir: artifacts/finetuned
+  finetuned_model_path: artifacts/finetuned/model

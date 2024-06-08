@@ -1,0 +1,47 @@
+##-----------TrainingArguments
+per_device_train_batch_size :  1 #4
+per_device_eval_batch_size :  1 #4
+# gradient_accumulation_steps :  2
+# gradient_checkpointing: True
+
+optim :  "paged_adamw_8bit"  #"paged_adamw_32bit"
+learning_rate :  2e-4
+#lr_scheduler_type: 'linear', #default
+bf16: True #fp16: True
+max_grad_norm :  1 #0.3
+warmup_ratio :  0.1 #0.03
+group_by_length: True
+weight_decay: 0.01
+num_train_epochs: 1
+output_dir: "" 
+logging_dir: "finetuning_logs"
+logging_steps: 10
+save_total_limit: 1  #how many checkpoint to keep
+save_strategy: "epoch"                       
+eval_strategy: "epoch"
+load_best_model_at_end: True
+
+## --------------SFTTrainer
+dataset_text_field: "Text" #"text"
+max_seq_length: 2099
+## --------------for get_train_test_splits
+total_use: 0.1 
+train_use: 0.9
+## --------------for loraconfig
+r: 8
+lora_alpha: 32
+lora_dropout: 0.1
+target_modules: ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+layers_to_transform: [16, 17]
+
+## --------------for production service
+service_max_new_tokens: 1500
+service_temperature: 0.20
+# service_top_p: 0.55
+service_top_k: 3 #50
+service_repetition_penalty: 1.
+service_do_sample: True
+service_model_path: 'artifacts/finetuned/model'
+service_tokenizer_path: 'artifacts/pretrained/tokenizer'
+service_device: 'cpu'
+

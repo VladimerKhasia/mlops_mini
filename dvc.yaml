@@ -1,0 +1,62 @@
+stages:
+  get_data:
+    cmd: python src/llm_fc/pipeline/prepare_data_pipeline.py
+    deps:
+      - src/llm_fc/pipeline/prepare_data_pipeline.py
+      - artifact_config.yaml
+    outs:
+      - artifacts/data
+
+
+  get_pretrained_model:
+    cmd: python src\llm_fc\pipeline\get_pretrained_pipeline.py
+    deps:
+      - src\llm_fc\pipeline\get_pretrained_pipeline.py
+      - artifact_config.yaml
+    outs:
+      - artifacts/pretrained
+
+
+  finetuning_and_evaluation:
+    cmd: python src\llm_fc\pipeline\finetuning_pipeline.py
+    deps:
+      - src\llm_fc\pipeline\finetuning_pipeline.py
+      - artifact_config.yaml
+      - artifacts/data
+      - artifacts/pretrained
+    params:
+      ##-----------TrainingArguments
+      - per_device_train_batch_size
+      - per_device_eval_batch_size
+      # - gradient_accumulation_steps
+      # - gradient_checkpointing
+      - optim
+      - learning_rate
+      #- lr_scheduler_type
+      - bf16
+      - max_grad_norm
+      - warmup_ratio
+      - group_by_length
+      - weight_decay
+      - num_train_epochs
+      - output_dir
+      - logging_dir
+      - logging_steps
+      - save_total_limit
+      - save_strategy                      
+      - eval_strategy
+      - load_best_model_at_end
+      ## --------------SFTTrainer
+      - dataset_text_field
+      - max_seq_length
+      ## --------------for get_train_test_splits
+      - total_use
+      - train_use
+      ## --------------for loraconfig
+      - r
+      - lora_alpha
+      - lora_dropout
+      - target_modules
+      - layers_to_transform
+    outs:
+      - artifacts/finetuned/model

@@ -1,0 +1,100 @@
+schema: '2.0'
+stages:
+  get_data:
+    cmd: python src/llm_fc/pipeline/prepare_data_pipeline.py
+    deps:
+    - path: artifact_config.yaml
+      hash: md5
+      md5: 1055d1a75a1d2e490008269aa711b257
+      size: 418
+    - path: src/llm_fc/pipeline/prepare_data_pipeline.py
+      hash: md5
+      md5: 1d68044379a1e3183901af60e06fa87f
+      size: 834
+    outs:
+    - path: artifacts/data
+      hash: md5
+      md5: aafa7f517e8ea2953bf0b6c6f663bb56.dir
+      size: 290866945
+      nfiles: 3
+  get_pretrained_model:
+    cmd: python src\llm_fc\pipeline\get_pretrained_pipeline.py
+    deps:
+    - path: artifact_config.yaml
+      hash: md5
+      md5: 1055d1a75a1d2e490008269aa711b257
+      size: 418
+    - path: src\llm_fc\pipeline\get_pretrained_pipeline.py
+      hash: md5
+      md5: 7e37ee63c061302576f380ffd1dc0315
+      size: 796
+    outs:
+    - path: artifacts/pretrained
+      hash: md5
+      md5: 2fc64fdb1b0965e1faf15cbeb479e031.dir
+      size: 5029940449
+      nfiles: 8
+  finetuning_and_evaluation:
+    cmd: python src\llm_fc\pipeline\finetuning_pipeline.py
+    deps:
+    - path: artifact_config.yaml
+      hash: md5
+      md5: 1055d1a75a1d2e490008269aa711b257
+      size: 418
+    - path: artifacts/data
+      hash: md5
+      md5: 7ae915f65871de80b7e634e031316ca8.dir
+      size: 582549025
+      nfiles: 5
+    - path: artifacts/pretrained
+      hash: md5
+      md5: 2fc64fdb1b0965e1faf15cbeb479e031.dir
+      size: 5029940449
+      nfiles: 8
+    - path: src\llm_fc\pipeline\finetuning_pipeline.py
+      hash: md5
+      md5: 9e02a0f933b454e2ff44412edf4eb674
+      size: 915
+    params:
+      params.yaml:
+        bf16: true
+        dataset_text_field: Text
+        eval_strategy: epoch
+        group_by_length: true
+        layers_to_transform:
+        - 16
+        - 17
+        learning_rate: 0.0002
+        load_best_model_at_end: true
+        logging_dir: finetuning_logs
+        logging_steps: 10
+        lora_alpha: 32
+        lora_dropout: 0.1
+        max_grad_norm: 1
+        max_seq_length: 2099
+        num_train_epochs: 1
+        optim: paged_adamw_8bit
+        output_dir: ''
+        per_device_eval_batch_size: 1
+        per_device_train_batch_size: 1
+        r: 8
+        save_strategy: epoch
+        save_total_limit: 1
+        target_modules:
+        - q_proj
+        - k_proj
+        - v_proj
+        - o_proj
+        - gate_proj
+        - up_proj
+        - down_proj
+        total_use: 0.1
+        train_use: 0.9
+        warmup_ratio: 0.1
+        weight_decay: 0.01
+    outs:
+    - path: artifacts/finetuned/model
+      hash: md5
+      md5: ffdcd3d4a0d266bca0cea3664f2616bb.dir
+      size: 10024723066
+      nfiles: 6
