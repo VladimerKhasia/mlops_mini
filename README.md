@@ -1,6 +1,6 @@
 ![github-actions](https://github.com/VladimerKhasia/mlops_mini/actions/workflows/main.yml/badge.svg)
 
-# Small but full stack MLOps platform
+# Small full stack MLOps platform
 
 `langChain` `fastapi` `pydantic` `DVC` `Weights & Biases` `PyTorch` `Generative AI` `gemma-1.1-2b-it` `Hugging Face` `pytest` `docker` `CI/CD github-actions` etc.
 
@@ -50,30 +50,49 @@ This is how the `requirements.txt` file was originally populated: `pip freeze > 
 
 
 `dvc init` -> `dvc repro` -> [`git add dvc.lock` >> ` dvc config core.autostage true` (for `dvc add something`) >> `dvc remote add -d origin https://github.com/VladimerKhasia/mlops_mini` >> `dvc push`] -> `dvc dag` 
-- `dvc repro` runs and tracks your pipelines. It also means that instead of running `python main.py` you run your code with `dvc repro` which uses your `dvc.yaml` file. DVC may ask you to remove some  directories from being traked by Git. Sometimes after adding some files and directories to .gitignore it still traks them. You can check the status if it is true and if it is you can remove them. e.g. this one remove artifacts directory `git rm -r --cached artifacts`
-- `git add dvc.lock dvc.yaml` (adds these files to git to track, so that when you do git commit and git push they are in repository for collaborators to see them) >> `dvc config core.autostage true` (basically it performs git add automatically after dvc commands that change cause changes in files: dvc repro, dvc add, dvc remove) >> `dvc push` commands ensure the proper integration with gith and github. 
-- `dvc dag` displays dependency graph of the stages in one or more pipelines. 
-- `dvc list .` to show what directories and files does DVC track in the current directory `.`. If you want to see all subfolders and directories use `dvc list . -R`. Adding the flag `--dvc-only` in the end like `dvc list . --dvc-only` will give you directories and filestracked only by dvc and not by git if there are such files. You can allways modify your `.dvcignore` file accordingly.
-- `dvc gc -a --all-branches --all-tags --all-commits` removes all cache from dvc. `dvc remove <something>` removes tracked files metadata and stops tracking.
+
+```mermaid
+graph TD;
+    A(dvc init) --> B(dvc repro);
+    B --> C;
+    C(git add dvc.lock) --> D(dvc config core.autostage true);
+    D --> E(dvc remote add -d origin https://github.com/VladimerKhasia/mlops_mini);
+    E --> F(dvc push);
+    B --> H(dvc dag);
+```
 
 
-You use DVC for github if you want to share model and data versioning. You use Git for publishing on github if you want to share just code versions.
+- DVC's repro command executes and tracks your pipelines. Instead of directly running python main.py, you use dvc repro, which utilizes your dvc.yaml file. Occasionally, DVC may prompt you to exclude certain directories from Git tracking. Despite adding them to `.gitignore`, they might still be tracked. You can verify this by checking the status. If true, you can remove them using commands like `git rm -r --cached artifacts`.
 
-    - activate the environment (venv) 
-    - `git init`
-    - `git add .`
-    - `git commit -m "first commit`
-    - `git branch -M main`
-    - create empty repository on github mlops_mini
-    - `git remote add origin https://github.com/VladimerKhasia/mlops_mini.git`  
-    - `git push -u origin main`
+- After ensuring that undesired files are removed, add the necessary files to Git tracking with `git add dvc.lock dvc.yaml`. These files, once committed and pushed, allow collaborators to access them in the repository. By setting dvc config core.autostage true, Git automatically stages changes made by DVC commands such as `repro`, `add`, or `remove`.
 
+- The `dvc push` command ensures seamless integration with Git and GitHub.
 
-    If you want to change remote repo: `git remote set-url origin https://github.com/VladimerKhasia mlops_mini.git` verify change with `git remote -v` and `git push -u origin main`
+- `dvc dag` provides a visual representation of the dependency graph for stages in one or more pipelines.
 
-    If you want just add new remote repo: `git remote add main_2 <new_repository_url>` -> `git push main_2`
-    Push local repo to the remote repository on github: `git push -u origin main_2`
+- To see which directories and files DVC tracks in the current directory, use `dvc list .`. For a comprehensive list, including subdirectories, append `-R .`. Adding the `--dvc-only` flag at the end, as in `dvc list . --dvc-only`, displays files tracked solely by DVC, excluding those tracked by Git. Adjust your .dvcignore file as needed.
+
+- Be careful with `dvc gc -a --all-branches --all-tags --all-commits` as it removes all cache from DVC. `dvc remove <something>` deletes tracked file metadata and stops tracking it.
 
 
-To run fastapi app: `fastapi dev src/app/main.py` but before allways update your application to the latest changes with `dvc repro`
+Now quick reference to Git and Github:
+
+     - `git init`
+     - `git add .`
+     - `git commit -m "first commit`
+     - `git branch -M main`
+     - create empty repository on github mlops_mini
+     - `git remote add origin https://github.com/VladimerKhasia/mlops_mini.git`  
+     - `git push -u origin main`
+
+     - `git remote set-url origin https://github.com/VladimerKhasia/mlops_mini.git`: Changes the remote repository URL to the specified GitHub repository.
+     - `git remote -v`: Verifies the change by displaying the current remote repository URLs.
+     - `git push -u origin main`: Pushes the changes to the main branch of the remote repository.
+     
+     - `git remote add main_2 <new_repository_url>`: Adds a new remote repository with the specified URL.
+     - `git push main_2`: Pushes changes to the newly added remote repository.
+     - `git push -u origin main`: Pushes the local repository to the remote repository on GitHub.
+
+
+Fastapi changed the way you run your app in dev or in production mode: `fastapi dev src/app/main.py` 
 
