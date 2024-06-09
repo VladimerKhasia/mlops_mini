@@ -1,6 +1,7 @@
 # mlops_mini
 
 
+
 Workflow:
 `artifact_config.yaml` [`params.yaml`, `settings.py`] -> `schemas.py` -> `utils.py` -> `config_manager.py` -> `components` -> `pipeline` -> `main.py` -> `dvc.yaml` -> `app`
 
