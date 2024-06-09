@@ -24,12 +24,14 @@ pip install [mkdocs](https://www.mkdocs.org/) or [sphinx](https://www.sphinx-doc
 
 You use DVC for github if you want to share model and data versioning. You use Git for publishing on github if you want to share just code versions.
 
-    `git init`
-    `git add README.md`
-    `git commit -m "first commit`
-    `git branch -M main`
-    `git remote add origin https://github.com/VladimerKhasia/mlops_mini.git`  # you can do everywhere without suffix `.git` as well
-    `git push -u origin main`
+    - activate the environment (venv) 
+    - `git init`
+    - `git add .`
+    - `git commit -m "first commit`
+    - `git branch -M main`
+    - create empty repository on github mlops_mini
+    - `git remote add origin https://github.com/VladimerKhasia/mlops_mini.git`  
+    - `git push -u origin main`
 
 
     If you want to change remote repo: `git remote set-url origin https://github.com/VladimerKhasia mlops_mini.git` verify change with `git remote -v` and `git push -u origin main`
