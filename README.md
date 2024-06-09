@@ -2,7 +2,7 @@
 
 # Small full stack MLOps platform
 
-`langChain` `fastapi` `pydantic` `DVC` `Weights & Biases` `PyTorch` `Generative AI` `gemma-1.1-2b-it` `Hugging Face` `pytest` `docker` `CI/CD github-actions` etc.
+`langChain` `fastapi` `pydantic` `Data Version Control` `Weights & Biases` `PyTorch` `Generative AI` `gemma-1.1-2b-it` `Hugging Face` `pytest` `docker` `CI/CD github-actions` etc.
 
 ### Brief Overview of the Application Integration Section
 The smallest GEMMA model, gemma-1.1-2b-it, was fine-tuned for function calling as part of the overall MLOps workflow. It was then integrated into a FastAPI-based mini application to enable functional conversation. The image below illustrates how the developed API operates.
@@ -37,7 +37,7 @@ WB_TOKEN = "b2dthfyjj7tykukkkkgui8675656jyjuiy6u66g'
 
 ### Here are some refreshers and a guide for beginners to pay attention to tricky details.
 
-This is how the `requirements.txt` file was originally populated: `pip freeze > requirements.txt`. You don't need to do this right now unless you're building your own project from scratch. Now, check the `requirements.txt` file and pay attention to the following:
+##### ⚡ This is how the `requirements.txt` file was originally populated: `pip freeze > requirements.txt`. You don't need to do this right now unless you're building your own project from scratch. Now, check the `requirements.txt` file and pay attention to the following:
 
 - Packages like PyTorch, torchvision, torchaudio, etc., may have a `+cu118` suffix, which must be commented out to avoid complications on Windows.
 - If you're developing an application on one type of platform and want to deploy it on another (e.g., Windows vs. Linux):
@@ -49,7 +49,10 @@ This is how the `requirements.txt` file was originally populated: `pip freeze > 
 - If you want to create some more text-based documentation: pip install [mkdocs](https://www.mkdocs.org/) or [sphinx](https://www.sphinx-doc.org/) use `sphinx-quickstart`.
 
 
-`dvc init` -> `dvc repro` -> [`git add dvc.lock` >> ` dvc config core.autostage true` (for `dvc add something`) >> `dvc remote add -d origin https://github.com/VladimerKhasia/mlops_mini` >> `dvc push`] -> `dvc dag` 
+
+##### ⚡ Data Version Control DVC
+
+Diagram shows basic but common steps you may need for data version control:
 
 ```mermaid
 graph TD;
@@ -75,7 +78,7 @@ graph TD;
 - Be careful with `dvc gc -a --all-branches --all-tags --all-commits` as it removes all cache from DVC. `dvc remove <something>` deletes tracked file metadata and stops tracking it.
 
 
-Now quick reference to Git and Github:
+##### ⚡ Quick reference to Git and Github:
 
      - `git init`
      - `git add .`
