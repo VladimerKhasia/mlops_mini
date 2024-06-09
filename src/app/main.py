@@ -14,15 +14,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-@app.get("/")
-def read_root():
-    return {"mlops_mini": "This is a small end-to-end AI project for you!"}
-
 app.include_router(toolcalling_service.router)
 # app.include_router(login.router)
 # app.include_router(users.router)
 
 
-
+@app.get("/")
+def read_root():
+    return {"mlops_mini": "This is a small end-to-end AI project for you!"}
 
