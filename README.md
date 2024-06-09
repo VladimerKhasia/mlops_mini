@@ -4,6 +4,7 @@
 
 `langChain` `fastapi` `pydantic` `Data Version Control` `Weights & Biases` `PyTorch` `Generative AI` `gemma-1.1-2b-it` `Hugging Face` `pytest` `docker` `CI/CD github-actions` etc.
 
+
 ### Brief Overview of the Application Integration Section
 The smallest GEMMA model, gemma-1.1-2b-it, was fine-tuned for function calling as part of the overall MLOps workflow. It was then integrated into a FastAPI-based mini application to enable functional conversation. The image below illustrates how the developed API operates.
 
@@ -31,9 +32,11 @@ WB_TOKEN = "b2dthfyjj7tykukkkkgui8675656jyjuiy6u66g'
          └── src/app
 
 
+
 ### The compact MLOps platform comprehensively automates the entire process, starting from data acquisition through model integration into applications, culminating in deployment on an Ubuntu VM.
 
 - A step-by-step guide for writting tests, dockerization, setting up a CI/CD pipeline, and deploying on Ubuntu is available in [another directory](https://github.com/VladimerKhasia/fastapi_X). This guide is entirely applicable to the above project; however, you should skip the sections related to databases as they are not used in this context.
+
 
 ### Here are some refreshers and a guide for beginners to pay attention to tricky details.
 
@@ -49,9 +52,7 @@ WB_TOKEN = "b2dthfyjj7tykukkkkgui8675656jyjuiy6u66g'
 - If you want to create some more text-based documentation: pip install [mkdocs](https://www.mkdocs.org/) or [sphinx](https://www.sphinx-doc.org/) use `sphinx-quickstart`.
 
 
-
 ##### ⚡ Data Version Control DVC
-
 Diagram shows basic but common steps you may need for data version control:
 
 ```mermaid
