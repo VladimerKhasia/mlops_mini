@@ -67,7 +67,7 @@ graph TD;
 ```
 
 
-- DVC's repro command executes and tracks your pipelines. Instead of directly running python main.py, you use dvc repro, which utilizes your dvc.yaml file. Occasionally, DVC may prompt you to exclude certain directories from Git tracking. Despite adding them to `.gitignore`, they might still be tracked. You can verify this by checking the status. If true, you can remove them using commands like `git rm -r --cached artifacts`.
+- `dvc repro` command executes and tracks your pipelines. Instead of directly running python main.py, you use dvc repro, which utilizes your dvc.yaml file. Occasionally, DVC may prompt you to exclude certain directories from Git tracking. Despite adding them to `.gitignore`, they might still be tracked. You can verify this by checking the status. If true, you can remove them using commands like `git rm -r --cached artifacts`.
 
 - After ensuring that undesired files are removed, add the necessary files to Git tracking with `git add dvc.lock dvc.yaml`. These files, once committed and pushed, allow collaborators to access them in the repository. By setting dvc config core.autostage true, Git automatically stages changes made by DVC commands such as `repro`, `add`, or `remove`.
 
