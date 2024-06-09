@@ -4,8 +4,9 @@
 
 `PyTorch` `Generative AI` `gemma-1.1-2b-it` `Hugging Face` `fastapi` `pydantic` `DVC` `Weights & Biases` `pytest` `docker` `CI/CD github-actions` etc.
 
-### Brief Overview of the Application Integration Section:
+### Brief Overview of the Application Integration Section
 The smallest GEMMA model, gemma-1.1-2b-it, was fine-tuned for function calling as part of the overall MLOps workflow. It was then integrated into a FastAPI-based mini application to enable functional conversation. The image below illustrates how the developed API operates.
+
 ![list response](https://github.com/VladimerKhasia/mlops_mini/assets/56228503/1ab0ca94-86b5-42a0-b390-09d50316316e)
 
 
@@ -18,19 +19,23 @@ WB_TOKEN = "b2dthfyjj7tykukkkkgui8675656jyjuiy6u66g'
 ## WB_TOKEN refers to Weights & Biases token, which you get after you create an account on Weights & Biases.
 ```
 
-### Workflow: 
+### Workflow 
 
-     ├── artifact_config.yaml  params.yaml  settings.py
-     └── schemas.py
-         └── config_manager.py
-         |   └── components
-         |       └── pipeline
+     ├── artifact_config.yaml  params.yaml  src/settings.py
+     └── src/llm_fc/schemas.py
+         └── src/llm_fc/config_manager.py
+         |   └── src/llm_fc/components
+         |       └── src/llm_fc/pipeline
          |           └── main.py
          |               └── dvc.yaml
-         └── app
+         └── src/app
 
-### MLOps mini platform covers and automates whole process from data aquisition to model integration into the application and deployment on ubintu VM
 
+### The compact MLOps platform comprehensively automates the entire process, starting from data acquisition through model integration into applications, culminating in deployment on an Ubuntu VM.
+
+- A step-by-step guide for dockerization, setting up a CI/CD pipeline, and deploying on Ubuntu is available in [another directory](https://github.com/VladimerKhasia/fastapi_X). This guide is entirely applicable to the above project; however, you should skip the sections related to databases as they are not used in this context.
+
+### Here are some refreshers and a guide for beginners to pay attention to tricky details.
 
 This is how requirements.txt was populated originally `pip freeze > requirements.txt`. You do not need to do this except when you install some additional package you want to be the part of requirements. Now, check `requirements.txt` :
 - pytorch, torchvision, torchaudio etc. may have `+cu118` as suffix which must be commented out to avoid complications on windows.
