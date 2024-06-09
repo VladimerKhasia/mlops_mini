@@ -123,24 +123,24 @@ class Finetuning:
             data_collator=self.data_collator,
         )
         # #----------------------------- UNCOMMENT FOR TRAINING ---------------------------------------
-        # self.trainer.train()   
+        self.trainer.train()   
 
-        # # Save the adapter weights
-        # adapter_path = self.config.output_dir / Path("function_calling_adapter")
-        # self.model.save_pretrained(adapter_path, "function_calling") 
+        # Save the adapter weights
+        adapter_path = self.config.output_dir / Path("function_calling_adapter")
+        self.model.save_pretrained(adapter_path, "function_calling") 
 
-        # # Merge adaptor with the model and save entire fine-tuned model
-        # self.model = self.model.merge_and_unload()                   
-        # self.model.save_pretrained(self.config.finetuned_model_path, "function_calling")
+        # Merge adaptor with the model and save entire fine-tuned model
+        self.model = self.model.merge_and_unload()                   
+        self.model.save_pretrained(self.config.finetuned_model_path, "function_calling")
         # #--------------------------------------------------------------------------------------------
 
-        # #------IF YOUR PC IS NOT CAPABLE OF TRAINING THE MODEL YOU CAN STILL CONTINUE LEARNING-------
-        # # You can use free google colab for training the model and put that model in directory: colab_trained_model/model".
-        # # You can put directory "colab_trained_model/" in .gitignore and in .dvcignore files
-        # # comment these two lines out in case of actual training.
-        model = AutoModelForCausalLM.from_pretrained("colab_trained_model/model")
-        model.save_pretrained("artifacts/finetuned/model")
-        # # -------------------------------------------------------------------------------------------
+        # # #------IF YOUR PC IS NOT CAPABLE OF TRAINING THE MODEL YOU CAN STILL CONTINUE LEARNING-------
+        # # # You can use free google colab for training the model and put that model in directory: colab_trained_model/model".
+        # # # You can put directory "colab_trained_model/" in .gitignore and in .dvcignore files
+        # # # comment these two lines out in case of actual training.
+        # model = AutoModelForCausalLM.from_pretrained("colab_trained_model/model")
+        # model.save_pretrained("artifacts/finetuned/model")
+        # # # -------------------------------------------------------------------------------------------
 
 
 
