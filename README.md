@@ -36,6 +36,7 @@ WB_TOKEN = "b2dthfyjj7tykukkkkgui8675656jyjuiy6u66g'
 ### The compact MLOps platform comprehensively automates the entire process, starting from data acquisition through model integration into applications, culminating in deployment on an Ubuntu VM.
 
 - A step-by-step guide for writting tests, dockerization, setting up a CI/CD pipeline, and deploying on Ubuntu is available in [another directory](https://github.com/VladimerKhasia/fastapi_X). This guide is entirely applicable to the above project; however, you should skip the sections related to databases as they are not used in this context.
+- Here are some more reference materials for [MLOps](https://github.com/VladimerKhasia/ML-in-Notebooks/tree/main/MLOps) and [LangChain integration with Gemma](https://github.com/VladimerKhasia/ML-in-Notebooks/tree/main/custom%20GenAI%20and%20tools).
 
 
 ### Here are some refreshers and a guide for beginners to pay attention to tricky details.
