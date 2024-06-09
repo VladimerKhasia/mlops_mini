@@ -32,7 +32,7 @@ jobs:
         #   fi
       - name: run pytest tests
         run: |
-          pip install pytest
+          pip install pytest pytest-mock
           pytest -v -s -x
 
     #   - name: Login to Docker Hub
