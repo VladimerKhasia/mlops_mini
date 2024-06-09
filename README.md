@@ -92,11 +92,8 @@ graph TD;
      - `git remote set-url origin https://github.com/VladimerKhasia/mlops_mini.git`: Changes the remote repository URL to the specified GitHub repository.
      - `git remote -v`: Verifies the change by displaying the current remote repository URLs.
      - `git push -u origin main`: Pushes the changes to the main branch of the remote repository.
-     
-     - `git remote add main_2 <new_repository_url>`: Adds a new remote repository with the specified URL.
-     - `git push main_2`: Pushes changes to the newly added remote repository.
-     - `git push -u origin main`: Pushes the local repository to the remote repository on GitHub.
 
 
-Fastapi changed the way you run your app in dev or in production mode: `fastapi dev src/app/main.py` 
+
+Fastapi changed the way you run your app in dev or in production mode. For dev mode use: `fastapi dev src/app/main.py` 
 
