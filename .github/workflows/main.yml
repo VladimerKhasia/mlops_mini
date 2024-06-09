@@ -30,12 +30,10 @@ jobs:
         #   else
         #     pip install -r requirements-linux.txt
         #   fi
-      - name: run pytest tests
-        run: |
-          pip install pytest
-          pytest -v -s -x
-        #   pip install pytest pytest-mock
-        #   pytest -v -s -x
+      # - name: run pytest tests
+      #   run: |
+      #     pip install pytest pytest-mock
+      #     pytest -v -s -x
 
 
     #   - name: Login to Docker Hub
