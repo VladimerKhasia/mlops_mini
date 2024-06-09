@@ -1,9 +1,36 @@
-# mlops_mini
+![github-actions](https://github.com/VladimerKhasia/mlops_mini/actions/workflows/main.yml/badge.svg)
+
+# Small but full stack MLOps platform
+
+`PyTorch` `Generative AI` `gemma-1.1-2b-it` `Hugging Face` `fastapi` `pydantic` `DVC` `Weights & Biases` `pytest` `docker` `CI/CD github-actions` etc.
+
+### Brief Overview of the Application Integration Section:
+The smallest GEMMA model, gemma-1.1-2b-it, was fine-tuned for function calling as part of the overall MLOps workflow. It was then integrated into a FastAPI-based mini application to enable functional conversation. The image below illustrates how the developed API operates.
+![list response](https://github.com/VladimerKhasia/mlops_mini/assets/56228503/1ab0ca94-86b5-42a0-b390-09d50316316e)
 
 
+You need to add .env file in the root directory. Example .env file looks like this:
+```
+HF_TOKEN = 'hfaoejfw8wognwo8ong49gg0ggwlgrmrmlsknlk'
+WB_TOKEN = "b2dthfyjj7tykukkkkgui8675656jyjuiy6u66g'
 
-Workflow:
-`artifact_config.yaml` [`params.yaml`, `settings.py`] -> `schemas.py` -> `utils.py` -> `config_manager.py` -> `components` -> `pipeline` -> `main.py` -> `dvc.yaml` -> `app`
+## HF_TOKEN refers to the Hugging Face token, which you get after you create an account on Hugging Face.
+## WB_TOKEN refers to Weights & Biases token, which you get after you create an account on Weights & Biases.
+```
+
+### Workflow: 
+
+     ├── artifact_config.yaml  params.yaml  settings.py
+     └── schemas.py
+         └── config_manager.py
+         |   └── components
+         |       └── pipeline
+         |           └── main.py
+         |               └── dvc.yaml
+         └── app
+
+### MLOps mini platform covers and automates whole process from data aquisition to model integration into the application and deployment on ubintu VM
+
 
 This is how requirements.txt was populated originally `pip freeze > requirements.txt`. You do not need to do this except when you install some additional package you want to be the part of requirements. Now, check `requirements.txt` :
 - pytorch, torchvision, torchaudio etc. may have `+cu118` as suffix which must be commented out to avoid complications on windows.
